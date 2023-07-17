@@ -5,10 +5,10 @@ const AddRandom = ({ addItem }) => {
   return (
     <button
       onClick={() =>
-        addItem(
-          Math.random().toString(36).substring(2, 7),
-          Math.floor(100000000 + Math.random() * 900000000)
-        )
+        addItem({
+          name: Math.random().toString(36).substring(2, 7),
+          phone: Math.floor(100000000 + Math.random() * 900000000),
+        })
       }
       className={css.btn}
     >

@@ -1,24 +1,42 @@
+import { useState } from 'react';
 import css from './Form.module.css';
 import PropTypes from 'prop-types';
 
 const Form = ({ addItem }) => {
+  const [state, setState] = useState({
+    name: '',
+    phone: '',
+  });
+
   const handleSubmit = e => {
     e.preventDefault();
-    const form = e.currentTarget;
-    const name = form.name.value;
-    const tel = form.tel.value;
-    addItem(name, tel);
-    form.reset();
+    addItem(state);
+    setState({
+      name: '',
+      phone: '',
+    });
   };
+
+  const handleChange = ({ target }) => {
+    const { name, value } = target;
+    setState({
+      ...state,
+      [name]: value,
+    });
+  };
+
+  const { name, phone } = state;
   return (
-    <form
-      className={css.form}
-      onSubmit={e => {
-        handleSubmit(e);
-      }}
-    >
-      <input className={css.item} type="text" name="name" placeholder="name" />
+    <form className={css.form} onSubmit={handleSubmit}>
       <input
+        onChange={handleChange}
+        className={css.item}
+        type="text"
+        name="name"
+        placeholder="name"
+      />
+      <input
+        onChange={handleChange}
         className={css.item}
         type="tel"
         name="tel"
