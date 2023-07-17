@@ -11,6 +11,7 @@ const Contact = props => {
     backgroundColor: '#b2faa2',
     fontWeight: 400,
   });
+  //.
   return (
     <li className={css.item}>
       <p className={css.name} style={state}>
