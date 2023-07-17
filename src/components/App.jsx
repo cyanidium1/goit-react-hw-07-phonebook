@@ -23,7 +23,6 @@ export const App = () => {
     error: contacts.error,
   });
 
-  const contacts = useSelector(getItems);
   const filter = useSelector(getFilter);
   const { loading, error } = useSelector(getState);
 
@@ -37,20 +36,6 @@ export const App = () => {
     const action = addContact(data);
     dispatch(action);
   };
-
-  const onRemoveContact = id => {
-    dispatch(removeContact(id));
-  };
-
-  const getFiltredContacts = () => {
-    const normalizeFilter = filter?.toLowerCase();
-    const filterContacts = contacts?.filter(contact =>
-      contact.name.toLowerCase().includes(normalizeFilter)
-    );
-    return filterContacts;
-  };
-
-  const filtredArray = getFiltredContacts();
 
   return (
     <div
@@ -66,12 +51,8 @@ export const App = () => {
         onChange={event => dispatch(setFilter(event.currentTarget.value))}
       />
       {error && <p>smth went wrong</p>}
-      {loading ? (
-        <p>...Loadind</p>
-      ) : (
-        <Contacts contacts={filtredArray} removeContact={onRemoveContact} />
-      )}
-      <Form addItem={addItem} />
+      {loading ? <p>...Loadind</p> : <Contacts />}
+      <Form />
       <Kek />
       <AddRandom addItem={addItem} />
     </div>
